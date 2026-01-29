@@ -34,7 +34,7 @@ class Program
 
             while (rodando)
             {
-                Console.WriteLine("\n=== Menu Produtos ===");
+                Console.WriteLine("\nMenu Produtos");
                 Console.WriteLine("1 - Listar produtos");
                 Console.WriteLine("2 - Adicionar produto");
                 Console.WriteLine("3 - Editar produto");

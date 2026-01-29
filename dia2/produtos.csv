@@ -2,3 +2,9 @@ Id,Nome,Preco,Quantidade
 1,manga,100,2
 2,manga,5,2
 3,manga,500,2
+4,jaca,0,2
+5,l,0,1
+6,teste,2,1
+7,l,1,-1
+8,l,2,2
+9,teste,10,5

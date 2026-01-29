@@ -105,43 +105,75 @@ class Program
     }
 
     static void Adicionar()
-    {
-        var lista = LerCsv();
-        Console.Write("Nome do produto: ");
-        string nome = Console.ReadLine();
-        Console.Write("Preço do produto: ");
-        decimal preco = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-        Console.Write("Quantidade: ");
-        int qtd = int.Parse(Console.ReadLine());
+{
+    var lista = LerCsv();
+    
+    Console.Write("Nome do produto: ");
+    string nome = Console.ReadLine() ?? "Sem Nome";
+    
+    Console.Write("Preço do produto: ");
+    decimal preco = decimal.Parse(Console.ReadLine() ?? "0", CultureInfo.InvariantCulture);
+    
+    Console.Write("Quantidade: ");
+    int qtd = int.Parse(Console.ReadLine() ?? "0");
 
-       
+    
+    if (preco > 0 && qtd > 0 )
+    {
+        
         int id = lista.Count > 0 ? lista.Max(p => p.Id) + 1 : 1;
         lista.Add(new Produto(id, nome, preco, qtd));
 
         SalvarCsv(lista);
-        Console.WriteLine("Produto adicionado!");
+        Console.WriteLine("Sucesso: Produto adicionado!");
     }
-
-    static void Editar()
+    else
     {
-        var lista = LerCsv();
-        Console.Write("Id do produto para editar: ");
-        int id = int.Parse(Console.ReadLine());
+        
+        Console.WriteLine("Erro: Preço e Quantidade devem ser maiores que zero. Operação cancelada.");
+    }
+}
+    static void Editar()
+{
+    var lista = LerCsv();
+    
+    Console.Write("Nome do produto: ");
+    string nome = Console.ReadLine() ?? "";
+    
+    Console.Write("Preço do produto (deve ser > 0): ");
+    string entradaPreco = Console.ReadLine() ?? "0";
+    
+    Console.Write("Quantidade (não pode ser negativa): ");
+    string entradaQtd = Console.ReadLine() ?? "0";
 
-        var p = lista.FirstOrDefault(x => x.Id == id);
-        if (p == null) { Console.WriteLine("Produto não encontrado!"); return; }
+    // Conversão segura dos valores
+    bool precoValido = decimal.TryParse(entradaPreco, CultureInfo.InvariantCulture, out decimal preco);
+    bool qtdValida = int.TryParse(entradaQtd, out int qtd);
 
-        Console.Write("Novo nome: ");
-        p.Nome = Console.ReadLine();
-        Console.Write("Novo preço: ");
-        p.Preco = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-        Console.Write("Nova quantidade: ");
-        p.Quantidade = int.Parse(Console.ReadLine());
+    
+    if (!string.IsNullOrWhiteSpace(nome) && precoValido && qtdValida && preco > 0 && qtd >= 0)
+    {
+        int id = lista.Count > 0 ? lista.Max(p => p.Id) + 1 : 1;
+        lista.Add(new Produto(id, nome, preco, qtd));
 
         SalvarCsv(lista);
-        Console.WriteLine("Produto atualizado!");
+        Console.WriteLine("Sucesso: Produto adicionado!");
     }
-
+    else
+    {
+        Console.WriteLine("\n--- ERRO DE VALIDAÇÃO ---");
+        if (string.IsNullOrWhiteSpace(nome)) 
+            Console.WriteLine("- O nome do produto não pode ser vazio.");
+        
+        if (!precoValido || preco <= 0) 
+            Console.WriteLine("- O preço deve ser um número maior que zero.");
+        
+        if (!qtdValida || qtd < 0) 
+            Console.WriteLine("- A quantidade não pode ser negativa.");
+        
+        Console.WriteLine("--------------------------");
+    }
+}
     static void Remover()
     {
         var lista = LerCsv();

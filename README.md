@@ -4,21 +4,21 @@ Este repositório contém os projetos desenvolvidos durante o Bootcamp .Net, org
 
 **Organização das branchs**
 
-Cada branch representa um dia do bootcamp.
+- Cada branch representa um dia do bootcamp.
 
 *Estrutura foi adotada:*
 
-main(branch principal)
+- main(branch principal)
 
-dtt/dia1/feature/bootcamp
+- dtt/dia1/feature/bootcamp
 
 Projetos e atividades desenvolvidas no Dia 1.
 
-dtt/dia2/feature/bootcamp
+- dtt/dia2/feature/bootcamp
 
 Projetos e atividades desenvolvidas no Dia 2.
 
-dtt/dia3/feature/bootcamp
+- dtt/dia3/feature/bootcamp
 
 Projetos e atividades desenvolvidas no Dia 3.
 

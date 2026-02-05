@@ -1,0 +1,15 @@
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\case2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\case2.AssemblyInfoInputs.cache
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\case2.AssemblyInfo.cs
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\case2.csproj.CoreCompileInputs.cache
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\case2.sourcelink.json
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\bin\Debug\net10.0\case2.exe
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\bin\Debug\net10.0\case2.deps.json
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\bin\Debug\net10.0\case2.runtimeconfig.json
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\bin\Debug\net10.0\case2.dll
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\bin\Debug\net10.0\case2.pdb
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\case2.dll
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\refint\case2.dll
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\case2.pdb
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\case2.genruntimeconfig.cache
+C:\Users\Lincon\Desktop\Deloitte\bootcamp_dtt\dia4\case2\obj\Debug\net10.0\ref\case2.dll

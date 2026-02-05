@@ -1,6 +1,6 @@
 **Projeto Realizado no terceiro dia do Bootcamp**
 
-Clicando na pasta dia2, será encontado dos cases que foram abordados no terceiro dia do bootcamp
+Clicando na pasta dia2, será encontado dois cases que foram abordados no terceiro dia do bootcamp.
 
 **case2**
 Fiz o programa que gerencia produtos em uma aplicação console, permitindo cadastrar, listar, editar e remover itens, com persistência dos dados em arquivo CSV e validações básicas de entrada dos protudos.

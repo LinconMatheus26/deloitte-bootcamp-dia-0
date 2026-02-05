@@ -6,7 +6,7 @@ Este repositório contém os projetos desenvolvidos durante o Bootcamp .Net, org
 
 - Cada branch representa um dia do bootcamp.
 
-*Estrutura foi adotada:*
+Estrutura foi adotada:
 
 - main(branch principal)
 

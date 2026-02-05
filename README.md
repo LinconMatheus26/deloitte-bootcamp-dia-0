@@ -10,17 +10,27 @@ Estrutura foi adotada:
 
 - main(branch principal)
 
+Projetos e atividades desenvolvidas no Dia 1.
 - dtt/dia1/feature/bootcamp
 
-Projetos e atividades desenvolvidas no Dia 1.
-
+Projetos e atividades desenvolvidas no Dia 2.
 - dtt/dia2/feature/bootcamp
 
-Projetos e atividades desenvolvidas no Dia 2.
-
+Projetos e atividades desenvolvidas no Dia 3.
 - dtt/dia3/feature/bootcamp
 
-Projetos e atividades desenvolvidas no Dia 3.
+Projetos e atividades desenvolvidas no Dia 4.
+- dtt/dia4/feature/bootcamp
+
+Projetos e atividades desenvolvidas no Dia 5.
+- dtt/dia5/feature/bootcamp
+
+Projetos e atividades desenvolvidas no Dia 6.
+- dtt/dia6/feature/bootcamp
+
+Projetos e atividades desenvolvidas no Dia 7.
+- dtt/dia7/feature/bootcamp
+
 
 
 **Para acessar os projetos, siga o passo a passo abaixo:**

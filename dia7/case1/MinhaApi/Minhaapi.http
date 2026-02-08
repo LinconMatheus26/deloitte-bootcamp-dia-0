@@ -1,6 +1,0 @@
-@Minhaapi_HostAddress = http://localhost:5232
-
-GET {{Minhaapi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

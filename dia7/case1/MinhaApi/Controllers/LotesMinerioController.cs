@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using MinhaApi.Data;
 using MinhaApi.Models;
 using MinhaApi.Dtos;
+using MinhaApi.Queues;
+
 
 namespace MinhaApi.Controllers
 {
@@ -11,10 +13,15 @@ namespace MinhaApi.Controllers
     public class LotesMinerioController : ControllerBase
     {
         private readonly AppDbContext _db;
+        private readonly RedisQueueService _queue; // <--- Adicionei o campo da fila
 
-        public LotesMinerioController(AppDbContext db) => _db = db;
+        // O CONSTRUTOR AGORA ACEITA 2 ARGUMENTOS (Isso resolve o erro do teste!)
+        public LotesMinerioController(AppDbContext db, RedisQueueService queue)
+        {
+            _db = db;
+            _queue = queue;
+        }
 
-        // --- GET ALL ---
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -22,7 +29,6 @@ namespace MinhaApi.Controllers
             return Ok(lotes);
         }
 
-        // --- GET BY ID ---
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -30,7 +36,6 @@ namespace MinhaApi.Controllers
             return lote is null ? NotFound() : Ok(lote);
         }
 
-        // --- POST: CREATE ---
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateLoteMinerioDto input)
         {
@@ -58,10 +63,12 @@ namespace MinhaApi.Controllers
             _db.LotesMinerio.Add(lote);
             await _db.SaveChangesAsync();
 
+            // --- SAÍDA PARA O REDIS (ENVIA PARA A FILA) ---
+            await _queue.EnviarParaFila("lotes_criados", lote);
+
             return CreatedAtAction(nameof(GetById), new { id = lote.Id }, lote);
         }
 
-        // --- PUT: UPDATE ---
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] CreateLoteMinerioDto input)
         {
@@ -81,10 +88,13 @@ namespace MinhaApi.Controllers
                 lote.DataProducao = DateTime.SpecifyKind(input.DataProducao.Value, DateTimeKind.Utc);
 
             await _db.SaveChangesAsync();
+
+            // --- AVISO NO REDIS ---
+            await _queue.EnviarParaFila("lotes_atualizados", lote);
+
             return Ok(lote);
         }
 
-        // --- DELETE ---
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -93,6 +103,9 @@ namespace MinhaApi.Controllers
 
             _db.LotesMinerio.Remove(lote);
             await _db.SaveChangesAsync();
+
+            // --- AVISO NO REDIS ---
+            await _queue.EnviarParaFila("lotes_deletados", new { Id = id });
 
             return NoContent();
         }

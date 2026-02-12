@@ -1,4 +1,5 @@
 services:
+  # --- BANCO DE DADOS POSTGRES ---
   postgres:
     image: postgres:16
     container_name: pg_estudos
@@ -18,10 +19,22 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
-    # Labels opcionais úteis para Rancher (facilitam identificação/agrupamento)
     labels:
       io.rancher.container.pull_image: always
       io.rancher.container.name: "PostgreSQL - Estudos"
+
+  # --- CACHE REDIS (ADICIONADO AQUI) ---
+  redis:
+    image: redis:alpine
+    container_name: redis_estudos
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 volumes:
   pgdata_estudos:

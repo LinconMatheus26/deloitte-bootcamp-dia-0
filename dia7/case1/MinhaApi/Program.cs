@@ -1,69 +1,56 @@
-<<<<<<< HEAD
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-=======
 using Microsoft.EntityFrameworkCore;
 using MinhaApi.Data;
-
-// Correção para o erro de TIMESTAMPTZ do PostgreSQL
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+using MinhaApi.Queues; // Importante para reconhecer a nova pasta
+using StackExchange.Redis; // Adicionado para suporte ao Worker
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona suporte aos Controllers e OpenAPI
+// --- 1. REGISTRO DE SERVIÇOS (Configuração) ---
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-// Configura a conexão com o PostgreSQL usando a string do appsettings.json
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// REGISTRO DA QUEUE: Essencial para o Controller conseguir usar o RedisQueueService
+builder.Services.AddScoped<RedisQueueService>();
+builder.Services.AddHostedService<LoteQueueWorker>();
 
+// Registro do Redis (Apenas se não for ambiente de Teste)
+if (builder.Environment.EnvironmentName != "Testing")
+{
+    var redisConnection = builder.Configuration.GetConnectionString("RedisConnection");
+
+    // Registro para o IDistributedCache (usado pelo RedisQueueService)
+    builder.Services.AddStackExchangeRedisCache(options => {
+        options.Configuration = redisConnection;
+    });
+
+    // Registro do Multiplexer (Essencial para o Worker conseguir listar chaves)
+    builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnection!));
+}
+
+// Registro do Postgres (Apenas se não for ambiente de Teste)
+if (builder.Environment.EnvironmentName != "Testing")
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+}
+
+// --- 2. CONSTRUÇÃO DO APP ---
 var app = builder.Build();
 
->>>>>>> 5fce523 (Salvando progresso da API na main)
-if (app.Environment.IsDevelopment())
+// --- 3. PIPELINE DE REQUISIÇÕES (Middlewares) ---
+
+// Habilita Swagger em Desenvolvimento ou Testes para validar a cobertura
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-<<<<<<< HEAD
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
-app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
-=======
-// Mapeia as rotas dos seus Controllers (Essencial para não dar erro de conexão)
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
->>>>>>> 5fce523 (Salvando progresso da API na main)
+
+// Necessário para o WebApplicationFactory dos testes
+public partial class Program { }

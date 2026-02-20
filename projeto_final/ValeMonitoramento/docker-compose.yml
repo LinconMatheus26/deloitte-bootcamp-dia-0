@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: vale_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: vale_user
+      POSTGRES_PASSWORD: vale_pass
+      POSTGRES_DB: vale_mineracao
+    ports:
+      - "5432:5432"

@@ -3,15 +3,9 @@
 API desenvolvida em **ASP.NET** para o controle e monitoramento de equipamentos pesados
 (caminhões, escavadeiras, perfuratrizes, entre outros).
 
-O sistema foi projetado com foco em:
-
-- Integridade de dados  
-- Alta performance  
-- Facilidade de uso para gestores de frota  
-
 ---
 
-## 📁 Estrutura do Repositório
+## Estrutura do Repositório
 
 ```
 ├── ValeMonitoramento/        # Projeto principal da API
@@ -26,7 +20,7 @@ Pasta que contém o **projeto principal da API**, incluindo:
 - DTOs
 - Data (Entity Framework)
 - Regras de negócio
-- Integração com banco de dados PostgreSQL
+- Integração com banco de dados
 
 ### ValeMonitoramento.test
 Pasta destinada aos **testes automatizados** da aplicação, contendo:
@@ -34,11 +28,9 @@ Pasta destinada aos **testes automatizados** da aplicação, contendo:
 - Testes de controllers
 - Validação das regras de negócio
 
-Essa separação garante maior **qualidade, organização e manutenibilidade** do sistema.
-
 ---
 
-## 🛠️ Pré-requisitos
+## Pré-requisitos
 
 Antes de iniciar, certifique-se de ter instalado:
 
@@ -55,7 +47,7 @@ dotnet --version
 
 ---
 
-## 📦 Instalação dos Pacotes (.NET)
+## Instalação dos Pacotes (.NET)
 
 Na raiz do projeto, execute:
 
@@ -71,7 +63,7 @@ dotnet build
 
 ---
 
-## 🐳 Como Rodar o Projeto via Docker Compose
+## Como Rodar o Projeto via Docker Compose
 
 ### 1. Subir o Banco de Dados (PostgreSQL)
 
@@ -87,7 +79,7 @@ docker ps
 
 ---
 
-## 🗄️ Configuração da Conexão no DBeaver
+## Configuração da Conexão no DBeaver
 
 - Host: localhost  
 - Porta: 5432  
@@ -97,7 +89,7 @@ docker ps
 
 ---
 
-## ▶️ Execução da Aplicação
+## Execução da Aplicação
 
 ### 2. Criar as Tabelas no Banco (Entity Framework)
 
@@ -116,7 +108,7 @@ dotnet run
 
 ---
 
-## 🔎 Testando a API
+## Testando a API
 
 ### Criar Equipamento (POST)
 
@@ -142,7 +134,7 @@ Resposta esperada: **201 Created**
 
 ---
 
-## 📄 Listagem de Equipamentos (GET)
+## Listagem de Equipamentos (GET)
 
 ```
 http://localhost:5000/api/equipamentos
@@ -155,7 +147,7 @@ Filtros disponíveis:
 
 ---
 
-## 🚀 Diferenciais Técnicos
+## Diferenciais Técnicos
 
 - Enums armazenados como texto
 - Índice único para evitar duplicidade
@@ -165,7 +157,7 @@ Filtros disponíveis:
 
 ---
 
-## 👨‍💻 Desenvolvedor
+## Desenvolvedor
 
 **Lincon**
 
